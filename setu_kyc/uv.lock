@@ -110,7 +110,7 @@ wheels = [
 ]
 
 [[package]]
-name = "setu-kyc"
+name = "setu_kyc"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
