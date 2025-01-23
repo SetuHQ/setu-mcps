@@ -1,0 +1,28 @@
+[project]
+name = "upi-deeplinks"
+version = "0.1.0"
+description = "MCP server for UPI Deeplinks"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.2.0",
+    "setu>=2.1.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[[project.authors]]
+name = "Kaustav Banerjee"
+email = "kaustav@setu.co"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.envs.default]
+dependencies = [
+    "uv",
+]
+
+[project.scripts]
+upi-deeplinks = "upi_deeplinks.server:run"
