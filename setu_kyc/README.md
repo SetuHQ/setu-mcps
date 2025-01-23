@@ -1,21 +1,9 @@
-# setu_kyc MCP server
+# Setu KYC MCP server
 
-A MCP server project for Setu setu_kyc APIs that provides verification tools for PAN, GST, and name matching.
+A MCP server project for Setu KYC APIs that provides verification tools for PAN, GST, and name matching.
 
 ## Components
 
-### Resources
-
-The server implements a simple note storage system with:
-- Custom note:// URI scheme for accessing individual notes
-- Each note resource has a name, description and text/plain mimetype
-
-### Prompts
-
-The server provides a single prompt:
-- summarize-notes: Creates summaries of all stored notes
-  - Optional "style" argument to control detail level (brief/detailed)
-  - Generates prompt combining all current notes with style preference
 
 ### Tools
 
