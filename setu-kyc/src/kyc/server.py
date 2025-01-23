@@ -20,7 +20,7 @@ SETU_HEADERS = {
     "x-client-secret": os.getenv("SETU_DG_CLIENT_SECRET"),
 }
 
-server = Server("kyc")
+server = Server("setu-kyc")
 
 @server.list_tools()
 async def handle_list_tools() -> list[types.Tool]:
@@ -215,7 +215,7 @@ async def main():
             read_stream,
             write_stream,
             InitializationOptions(
-                server_name="kyc",
+                server_name="setu-kyc",
                 server_version="0.1.0",
                 capabilities=server.get_capabilities(
                     notification_options=NotificationOptions(),

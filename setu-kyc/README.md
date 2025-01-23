@@ -1,6 +1,6 @@
-# kyc MCP server
+# setu-kyc MCP server
 
-A MCP server project for Setu KYC APIs that provides verification tools for PAN, GST, and name matching.
+A MCP server project for Setu setu-kyc APIs that provides verification tools for PAN, GST, and name matching.
 
 ## Components
 
@@ -56,7 +56,7 @@ SETU_DG_NAME_MATCH_PRODUCT_INSTANCE_ID=your-name-match-instance-id
 ### Install
 
 ```bash
-pip install kyc
+pip install setu-kyc
 ```
 
 #### Claude Desktop Configuration
@@ -69,13 +69,13 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
   
   ```json
   "mcpServers": {
-    "kyc": {
+    "setu-kyc": {
       "command": "uv",
       "args": [
         "--directory",
-        "/path/to/kyc",
+        "/path/to/setu-kyc",
         "run",
-        "kyc"
+        "setu-kyc"
       ],
       "env": {
         "SETU_DG_CLIENT_ID": "your-client-id",
@@ -94,10 +94,10 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
   
   ```json
   "mcpServers": {
-    "kyc": {
+    "setu-kyc": {
       "command": "uvx",
       "args": [
-        "kyc"
+        "setu-kyc"
       ],
       "env": {
         "SETU_DG_CLIENT_ID": "your-client-id",
@@ -135,7 +135,7 @@ uv publish
 For debugging, use the MCP Inspector:
 
 ```bash
-npx @modelcontextprotocol/inspector uv --directory /path/to/kyc run kyc
+npx @modelcontextprotocol/inspector uv --directory /path/to/setu-kyc run setu-kyc
 ```
 
 Upon launching, the Inspector will display a URL that you can access in your browser to begin debugging.
