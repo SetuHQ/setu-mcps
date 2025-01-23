@@ -44,7 +44,7 @@ SETU_DG_NAME_MATCH_PRODUCT_INSTANCE_ID=your-name-match-instance-id
 ### Install
 
 ```bash
-pip install setu_kyc
+pip install setu_mcp_kyc
 ```
 
 #### Claude Desktop Configuration
@@ -57,13 +57,13 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
   
   ```json
   "mcpServers": {
-    "setu_kyc": {
+    "setu_mcp_kyc": {
       "command": "uv",
       "args": [
         "--directory",
-        "/path/to/setu_kyc",
+        "/path/to/setu_mcp_kyc",
         "run",
-        "setu_kyc"
+        "setu_mcp_kyc"
       ],
       "env": {
         "SETU_DG_CLIENT_ID": "your-client-id",
@@ -82,10 +82,10 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
   
   ```json
   "mcpServers": {
-    "setu_kyc": {
+    "setu_mcp_kyc": {
       "command": "uvx",
       "args": [
-        "setu_kyc"
+        "setu_mcp_kyc"
       ],
       "env": {
         "SETU_DG_CLIENT_ID": "your-client-id",
@@ -123,7 +123,7 @@ uv publish
 For debugging, use the MCP Inspector:
 
 ```bash
-npx @modelcontextprotocol/inspector uv --directory /path/to/setu_kyc run setu_kyc
+npx @modelcontextprotocol/inspector uv --directory /path/to/setu_mcp_kyc run setu_mcp_kyc
 ```
 
 Upon launching, the Inspector will display a URL that you can access in your browser to begin debugging.

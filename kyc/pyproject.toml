@@ -1,11 +1,11 @@
 [project]
-name = "setu_kyc"
-version = "0.1.0"
-description = "A MCP server for Setu setu_kyc APIs providing PAN, GST, and name matching verification"
+name = "setu_mcp_kyc"
+version = "0.1.1"
+description = "A MCP server for Setu KYC APIs providing PAN, GST, and name matching verification"
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
-keywords = ["mcp", "setu_kyc", "setu", "verification", "pan", "gst"]
+keywords = ["mcp", "setu_mcp_kyc", "setu", "verification", "pan", "gst"]
 authors = [
     { name = "Kaustav Banerjee", email = "kaustav@setu.co" }
 ]
@@ -25,12 +25,13 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://setu.co"
-Repository = "https://github.com/SetuHQ/setu-mcps/tree/main/setu_kyc"
-Documentation = "https://github.com/SetuHQ/setu-mcps/tree/main/setu_kyc"
+Repository = "https://github.com/SetuHQ/setu-mcps/tree/main/kyc"
+Documentation = "https://github.com/SetuHQ/setu-mcps/tree/main/kyc#readme"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project.scripts]
-setu_kyc = "setu_kyc.server:run"
+setu_mcp_kyc = "setu_mcp_kyc.server:run"
+

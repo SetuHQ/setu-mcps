@@ -1,78 +1,82 @@
-# upi-deeplinks MCP server
+# Setu UPI Deeplinks MCP Server
 
-MCP server for UPI Deeplinks
+A Model Context Protocol (MCP) server that helps Claude generate and manage UPI payment deeplinks using Setu's payment infrastructure.
 
 ## Components
 
-### Resources
-
-The server implements a simple note storage system with:
-- Custom note:// URI scheme for accessing individual notes
-- Each note resource has a name, description and text/plain mimetype
-
-### Prompts
-
-The server provides a single prompt:
-- summarize-notes: Creates summaries of all stored notes
-  - Optional "style" argument to control detail level (brief/detailed)
-  - Generates prompt combining all current notes with style preference
-
 ### Tools
 
-The server implements one tool:
-- add-note: Adds a new note to the server
-  - Takes "name" and "content" as required string arguments
-  - Updates server state and notifies clients of resource changes
+The server implements the following payment management tools:
+
+1. **create-payment-link**: Create a new UPI payment link
+   - Required inputs:
+     - `amount`: Amount to be paid in paise
+     - `bill_id`: Unique identifier for the payment
+     - `payee_name`: Name of the payee
+   - Optional input:
+     - `note`: Transaction note
+   - Returns payment link details including UPI ID and short URL
+
+2. **expire-payment**: Expire an existing payment link
+   - Required input:
+     - `bill_id`: The bill ID of the payment to expire
+
+3. **initiate-refund**: Initiate a refund for a payment
+   - Required inputs:
+     - `bill_id`: The bill ID of the payment
+     - `refund_type`: Type of refund ("FULL" or "PARTIAL")
+
+4. **check-payment-status**: Check the status of a payment
+   - Required input:
+     - `bill_id`: The bill ID of the payment
+   - Returns current payment status
+
+5. **mock-payment**: Simulate a payment (sandbox mode only)
+   - Required inputs:
+     - `bill_id`: The bill ID of the payment
+     - `upi_id`: The UPI ID for the payee
+     - `amount`: Amount to be paid in Rupees
 
 ## Configuration
 
-[TODO: Add configuration details specific to your implementation]
+### Environment Variables
 
-## Quickstart
+The server requires the following environment variables:
 
-### Install
+```bash
+UPI_DEEPLINKS_SCHEME_ID=your-scheme-id
+UPI_DEEPLINKS_SECRET=your-secret
+UPI_DEEPLINKS_PRODUCT_INSTANCE_ID=your-product-instance-id
+SETU_AUTH_TYPE=OAUTH  # Optional, defaults to OAUTH
+SETU_MODE=SANDBOX     # Optional, defaults to SANDBOX
+```
 
-#### Claude Desktop
+### Claude Desktop Configuration
 
-On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
-On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
+**MacOS**: `~/Library/Application\ Support/Claude/claude_desktop_config.json`  
+**Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
 
-<details>
-  <summary>Development/Unpublished Servers Configuration</summary>
-  ```
+```json
+{
   "mcpServers": {
-    "upi-deeplinks": {
-      "command": "uv",
-      "args": [
-        "--directory",
-        "/Users/kaustav1996/setu/setu-mcps/upi-deeplinks",
-        "run",
-        "upi-deeplinks"
-      ]
-    }
-  }
-  ```
-</details>
-
-<details>
-  <summary>Published Servers Configuration</summary>
-  ```
-  "mcpServers": {
-    "upi-deeplinks": {
+    "setu_mcp_upi_deeplinks": {
       "command": "uvx",
       "args": [
-        "upi-deeplinks"
-      ]
+        "setu_mcp_upi_deeplinks"
+      ],
+      "env": {
+        "UPI_DEEPLINKS_SCHEME_ID": "your-scheme-id",
+        "UPI_DEEPLINKS_SECRET": "your-secret",
+        "UPI_DEEPLINKS_PRODUCT_INSTANCE_ID": "your-product-instance-id"
+      }
     }
   }
-  ```
-</details>
+}
+```
 
 ## Development
 
 ### Building and Publishing
-
-To prepare the package for distribution:
 
 1. Sync dependencies and update lockfile:
 ```bash
@@ -84,28 +88,23 @@ uv sync
 uv build
 ```
 
-This will create source and wheel distributions in the `dist/` directory.
-
 3. Publish to PyPI:
 ```bash
 uv publish
 ```
 
-Note: You'll need to set PyPI credentials via environment variables or command flags:
+Note: Set PyPI credentials via environment variables or command flags:
 - Token: `--token` or `UV_PUBLISH_TOKEN`
 - Or username/password: `--username`/`UV_PUBLISH_USERNAME` and `--password`/`UV_PUBLISH_PASSWORD`
 
 ### Debugging
 
-Since MCP servers run over stdio, debugging can be challenging. For the best debugging
-experience, we strongly recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
+Since MCP servers run over stdio, debugging can be challenging. For the best debugging experience, we strongly recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
 
-
-You can launch the MCP Inspector via [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with this command:
+Launch the MCP Inspector via [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm):
 
 ```bash
-npx @modelcontextprotocol/inspector uv --directory /Users/kaustav1996/setu/setu-mcps/upi-deeplinks run upi-deeplinks
+npx @modelcontextprotocol/inspector uv --directory /<path>/setu-mcps/upi-deeplinks run setu_mcp_upi_deeplinks
 ```
-
 
 Upon launching, the Inspector will display a URL that you can access in your browser to begin debugging.

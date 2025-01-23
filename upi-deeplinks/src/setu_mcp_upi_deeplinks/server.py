@@ -15,7 +15,7 @@ load_dotenv()
 # Store UPI payment links and their states
 payment_links: dict[str, dict] = {}
 
-server = Server("upi-deeplinks")
+server = Server("setu_mcp_upi_deeplinks")
 
 # Initialize Setu Deeplink client using environment variables
 deeplink = Deeplink(
@@ -243,7 +243,7 @@ async def main():
             read_stream,
             write_stream,
             InitializationOptions(
-                server_name="upi-deeplinks",
+                server_name="setu_mcp_upi_deeplinks",
                 server_version="0.1.0",
                 capabilities=server.get_capabilities(
                     notification_options=NotificationOptions(),

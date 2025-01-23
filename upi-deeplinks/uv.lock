@@ -367,7 +367,7 @@ wheels = [
 ]
 
 [[package]]
-name = "upi-deeplinks"
+name = "setu_mcp_upi_deeplinks"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
